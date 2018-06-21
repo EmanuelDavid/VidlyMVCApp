@@ -1,0 +1,16 @@
+﻿@model  VidlyMVCApp.ViewModels.ShowMoviesViewModel
+@{
+    ViewBag.Title = "Movies";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+@*//put the logic in view model*@
+@{
+    foreach (var movie in @Model.AllMovies)
+    {
+        <h3>@movie.Name has id = @movie.Id</h3>
+    }
+}
+
+
