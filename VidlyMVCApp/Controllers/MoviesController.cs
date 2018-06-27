@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using VidlyMVCApp.BL;
 using VidlyMVCApp.DL;
 using VidlyMVCApp.Models;
@@ -13,7 +15,7 @@ namespace VidlyMVCApp.Controllers
         {
             VidlyBL blVidly = new VidlyBL(new VidlyDLContext());
 
-            ShowMoviesViewModel viewModel = new ShowMoviesViewModel{AllMovies = blVidly.GetMovies()};
+            ShowMoviesViewModel viewModel = new ShowMoviesViewModel { AllMovies = blVidly.GetMovies() };
             //view with different name then action
             return View("Index", viewModel);
         }
@@ -22,10 +24,26 @@ namespace VidlyMVCApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        public void SaveMovie(Movie movieToBeSaved)
+        public ActionResult SaveMovie(Movie movieToBeSaved, string btnSubmit)
         {
-            //return movieToBeSaved.Name;
+            if (movieToBeSaved == null)
+            {
+                throw new ArgumentNullException(nameof(movieToBeSaved));
+            }
+
+            if (btnSubmit.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentNullException(nameof(btnSubmit));
+            }
+
+            if (btnSubmit.Equals("Add Movie"))
+            {
+                VidlyBL blVidly = new VidlyBL(new VidlyDLContext());
+                blVidly.SaveMovie(movieToBeSaved);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
