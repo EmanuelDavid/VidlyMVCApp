@@ -9,13 +9,23 @@ namespace VidlyMVCApp.Controllers
     public class MoviesController : Controller
     {
         // GET: Movies
-        public ActionResult DisplayMovies()
+        public ActionResult Index()
         {
             VidlyBL blVidly = new VidlyBL(new VidlyDLContext());
 
             ShowMoviesViewModel viewModel = new ShowMoviesViewModel{AllMovies = blVidly.GetMovies()};
             //view with different name then action
-            return View("ShowMovies", viewModel);
+            return View("Index", viewModel);
+        }
+
+        public ActionResult AddNew()
+        {
+            return View();
+        }
+        [HttpPost]
+        public void SaveMovie(Movie movieToBeSaved)
+        {
+            //return movieToBeSaved.Name;
         }
     }
 }
