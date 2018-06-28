@@ -46,5 +46,11 @@ namespace VidlyMVCApp.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult TestValidationAttibute(Movie model)
+        {
+
+            return View(model);
+        }
     }
 }

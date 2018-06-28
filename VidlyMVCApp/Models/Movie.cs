@@ -9,8 +9,8 @@ namespace VidlyMVCApp.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Name of the movie is mandatory!")]
-       // [NameValidation]
+        //[Required(ErrorMessage = "Name of the movie is mandatory!")]
+        [NameValidationAttribute]
         public string Name { get; set; }
     }
 }
