@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using VidlyMVCApp.Validations;
 
 namespace VidlyMVCApp.Models
 {
@@ -10,6 +8,9 @@ namespace VidlyMVCApp.Models
     public class Movie
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Name of the movie is mandatory!")]
+       // [NameValidation]
         public string Name { get; set; }
     }
 }

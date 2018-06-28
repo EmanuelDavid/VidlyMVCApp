@@ -13,9 +13,9 @@ namespace VidlyMVCApp.Controllers
         // GET: Movies
         public ActionResult Index()
         {
-            VidlyBL blVidly = new VidlyBL(new VidlyDLContext());
+            var blVidly = new VidlyBL(new VidlyDLContext());
 
-            ShowMoviesViewModel viewModel = new ShowMoviesViewModel { AllMovies = blVidly.GetMovies() };
+            var viewModel = new ShowMoviesViewModel {AllMovies = blVidly.GetMovies()};
             //view with different name then action
             return View("Index", viewModel);
         }
@@ -28,21 +28,22 @@ namespace VidlyMVCApp.Controllers
         [HttpPost]
         public ActionResult SaveMovie(Movie movieToBeSaved, string btnSubmit)
         {
-            if (movieToBeSaved == null)
-            {
-                throw new ArgumentNullException(nameof(movieToBeSaved));
-            }
+            if (movieToBeSaved == null) throw new ArgumentNullException(nameof(movieToBeSaved));
 
-            if (btnSubmit.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentNullException(nameof(btnSubmit));
-            }
+            if (btnSubmit.IsNullOrWhiteSpace()) throw new ArgumentNullException(nameof(btnSubmit));
 
             if (btnSubmit.Equals("Add Movie"))
             {
-                VidlyBL blVidly = new VidlyBL(new VidlyDLContext());
-                blVidly.SaveMovie(movieToBeSaved);
+                if (ModelState.IsValid)
+                {
+                    var blVidly = new VidlyBL(new VidlyDLContext());
+                    blVidly.SaveMovie(movieToBeSaved);
+                    return RedirectToAction("Index");
+                }
+
+                return RedirectToAction("AddNew");
             }
+
             return RedirectToAction("Index");
         }
     }
