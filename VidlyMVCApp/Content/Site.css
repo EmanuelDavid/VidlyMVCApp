@@ -38,3 +38,7 @@ textarea {
 .field-validation-valid {
     display: none;
 }
+
+.validation-error {
+    display: none;
+}

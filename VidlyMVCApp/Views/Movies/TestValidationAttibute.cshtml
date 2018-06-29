@@ -16,8 +16,8 @@
     <div>
          @Html.ValidationMessageFor(model => model.Name)  
     </div>
-
+    <span class="validation-error" id="spanErrorDisplay">fdg</span>
     <p>  
-        <input type="submit" value="Save" onclick=" IsNameEmpty();" />  
+        <input type="submit" value="Save" onclick="return  IsNameEmpty();" />  
     </p> 
 }
