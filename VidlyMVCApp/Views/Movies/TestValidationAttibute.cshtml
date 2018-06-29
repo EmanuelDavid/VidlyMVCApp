@@ -6,6 +6,7 @@
 }
 <head>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/Validation.js"></script>
 </head>
 <h2>TestValidationAttibute</h2>
 
@@ -14,10 +15,9 @@
     @Html.EditorFor(model => model.Name)  
     <div>
          @Html.ValidationMessageFor(model => model.Name)  
-       @* @Html.ValidationSummary()*@
     </div>
 
     <p>  
-        <input type="submit" value="Save" />  
+        <input type="submit" value="Save" onclick=" IsNameEmpty();" />  
     </p> 
 }
